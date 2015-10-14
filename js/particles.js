@@ -28,7 +28,7 @@ $(window).on('resize', function () {
 });
 
 // Set the background colour of the scene
-renderer.setClearColor(0x333F47, 1);
+renderer.setClearColor(0x00aa33, 1);
 
 
 // LIGHT
@@ -63,51 +63,6 @@ plane.position.z=0
 // add the plane to the scene
 scene.add(plane);
 
-//CUBE
-
-//Cube Holder
-var cubeList = [];
-
-//Multiple Cube Area Size
-var cubeRange = new THREE.Vector3( 100, 50, 100);
-
-var phong = new THREE.MeshPhongMaterial( { color: 0x00ff00, specular: 0x666666, emissive: 0xff0000, shininess: 1, shading: THREE.SmoothShading, opacity: 0.9, transparent: true });
-
-var cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-var material = new THREE.MeshBasicMaterial({color: 0x00ff00}); //plain
-var cubeMaterial = new THREE.MeshLambertMaterial({color: 0x00ffaa});
-var cube = new THREE.Mesh(cubeGeometry, phong);
-var cubeTwo = new THREE.Mesh(cubeGeometry, cubeMaterial);
-
-scene.add(cube, cubeTwo);
-cubeTwo.position.x = 2;
-
-var nBoxes = 200;
-        for ( var i = 0; i < nBoxes; i++ ) {
-            var mesh = new THREE.Mesh( cubeGeometry, phong );
-            mesh.position.set( cubeRange.x/2 - cubeRange.x * Math.random(),
-                               cubeRange.y/2 - cubeRange.y * Math.random(),
-                               cubeRange.z/2 - cubeRange.z * Math.random());
-            scene.add( mesh );
-
-            cubeList.push( mesh );
-        }
-
-
-//SPHERE
-var sphereGeometry = new THREE.SphereGeometry(4,20,20);
-var sphereMaterial = new THREE.MeshLambertMaterial({color: 0x7777ff});
-var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
-
-// position the sphere
-sphere.position.x=10;
-sphere.position.y=0;
-sphere.position.z=0;
-sphere.castShadow=true;
-
-// add the sphere to the scene
-scene.add(sphere);
-
 
 // Add OrbitControls so that we can pan around with the mouse
 controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -123,7 +78,7 @@ var going = true;
 // create the particle variables
 var particleCount = 1800,
     particles = new THREE.Geometry(),
-    pMaterial = new THREE.ParticleBasicMaterial({
+    pMaterial = new THREE.PointsMaterial({
         color: 0xFFFFFF,
         size: 20,
         map: THREE.ImageUtils.loadTexture("particle.png"),
@@ -149,7 +104,7 @@ for (var p = 0; p < particleCount; p++) {
 }
 
 // create the particle system
-var particleSystem = new THREE.ParticleSystem(
+var particleSystem = new THREE.Points(
     particles,
     pMaterial);
 
@@ -162,31 +117,10 @@ scene.add(particleSystem);
 //ANIMATE 
 //////////////////////////////
 var animate = function () {
-    var direction = (going) ? 0.1 : -0.1;
+
+    particleSystem.rotation.y += 0.01;
 
     requestAnimationFrame(animate);
-
-    cube.rotation.x += 0.1;
-    // cube.position.x += direction;
-    // cube.position.y += 0.001
-    cubeTwo.rotation.x += 0.001
-    cubeTwo.rotation.y += 0.01
-
-
-    for (var i = 0; i < cubeList.length; i++) {
-        direction = (going) ? 1 : -1;
-        if( cubeList[i].position.x > 200) {
-            going = false;
-        }
-        if( cubeList[i].position.x < -200) {
-            going = true;
-        }
-            cubeList[i].position.x += direction;
-            cubeList[i].rotation.x -= 0.1 * Math.random();
-            cubeList[i].rotation.y -= 0.1 * Math.random();
-    }
-
-    // console.log(cubeList[1].position.x)
     
     // Render the scene
     renderer.render(scene, camera);
