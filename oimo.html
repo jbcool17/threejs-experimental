@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>oimo</title>
+</head>
+<style>
+    body {
+        margin: 0;
+    }
+    
+    canvas {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<body>
+
+<div id='interface'>
+    <input type="button" value="sphere" onClick=populate(1)>
+    <input type="button" value="boxe" onClick=populate(2)>
+    <input type="button" value="mix" onClick=populate(3)>
+    <input type="number" name="quantity" min="10" max="2000" value="400"  id='MaxNumber'>
+    <input type="submit" onClick=populate()>
+    <input type="number" name="gravity" min="-20" max="20" value="-10" id='gravity' onChange=gravity() >
+</div>
+<div id='info'></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/Oimo.min.js"></script>
+    <script src="js/oimo_test.js"></script>
+
+</body>
+
+
+
+
+</html>

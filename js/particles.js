@@ -1,7 +1,6 @@
 
 
 var scene, camera, renderer;
-
 // Create the scene and set the scene size
 scene = new THREE.Scene();
 var WIDTH = window.innerWidth,
@@ -62,7 +61,7 @@ plane.position.y=-1
 plane.position.z=0
 
 // add the plane to the scene
-// scene.add(plane);
+scene.add(plane);
 
 
 // Add OrbitControls so that we can pan around with the mouse
@@ -78,10 +77,11 @@ var going = true;
 
 // create the particle variables
 var sprite = THREE.ImageUtils.loadTexture( "disc.png" );
-var particleCount = 1800,
+var particleCount = 100,
     particles = new THREE.Geometry(),
-    pMaterial = new THREE.PointsMaterial({ size: 35, sizeAttenuation: false, map: sprite, alphaTest: 0.5, transparent: true });
+    pMaterial = new THREE.PointsMaterial({ size: 25, sizeAttenuation: false, map: sprite, alphaTest: 0.5, transparent: true });
     pMaterial.color.setHSL( 1.0, 5, 0.7 );
+
 
 // particleSystem.sortParticles = true;
 
@@ -122,6 +122,7 @@ var animate = function () {
     // particleSystem.rotation.y += 0.01;
     h = ( 360 * ( 1.0 + time ) % 360 ) / 360;
     pMaterial.color.setHSL( h, 0.5, 0.5 );
+    // pMaterial.opacity = Math.random();
 
     for ( i = 0; i < scene.children.length; i ++ ) {
 
@@ -132,17 +133,19 @@ var animate = function () {
         if ( object instanceof THREE.Points ) {
 
             object.rotation.y = time * ( i < 4 ? i + 1 : - ( i + 1 ) );
+            // object.position.x += Math.sin( time * 0.7 ) * 3;
+            // object.position.y += Math.cos( time * 0.5 ) * 4;
+            // object.position.z += Math.cos( time * 0.3 ) * 3;
             // while (pCount--) {
 
             //     // get the particle
-            //     var particle =
-            //       particles.vertices[pCount];
+            //     var particle = particles.vertices[pCount];
 
             //     // check if we need to reset
-            //     if (object.position.y < -200) {
-            //       object.position.y = 200;
-            //       object.position.y = 0;
-            //     }
+                // if (object.position.y < -200) {
+                //   object.position.y = 200;
+                //   object.position.y = 0;
+                // }
 
             //     // update the velocity with
             //     // a splat of randomniz

@@ -41,7 +41,7 @@ var scene, camera, renderer;
     loader.load('models/star-wars-vader-tie-fighter.json', function (object) {
         // var material = new THREE.MeshLambertMaterial();
         // mesh = new THREE.Mesh(geometry, material);
-        setInterval(object.position.x += 0.1, 1000);
+        
         scene.add(object);
     });
 

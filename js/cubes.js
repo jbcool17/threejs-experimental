@@ -198,8 +198,34 @@ animate();
 
 
 
-// $(document).ready(function () {
-//     init();
-//     animate();
+$(document).ready(function () {
+     $( "body" ).keypress(function(e){ 
+        console.log(e.keyCode);
+
+        //UP
+        if (e.keyCode === 119) {
+            cubeTwo.position.y += 1;
+        }
+        //DOWN
+        if (e.keyCode === 115) {
+            cubeTwo.position.y -= 1;
+        }
+
+        //LEFT
+        if (e.keyCode === 97) {
+            cubeTwo.position.x -= 1;
+        }
+        //RIGHT
+        if (e.keyCode === 100) {
+            cubeTwo.position.x += 1;
+        }
+        //Z AXIS
+        if (e.keyCode === 113) {
+            cubeTwo.position.z -= 1;
+        }
+        if (e.keyCode === 101) {
+            cubeTwo.position.z += 1;
+        }
+     });
     
-// });
+});
